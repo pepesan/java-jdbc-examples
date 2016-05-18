@@ -52,6 +52,7 @@ public class JDBCMysqlInsertRecord {
                 ResultSet rs=statement.executeQuery("select LAST_INSERT_ID()");
                 rs.next();
                 Integer lastid = rs.getInt(1);
+                rs.close();
                 System.out.println("Insert ID:"+lastid);
 
 
