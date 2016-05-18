@@ -52,6 +52,12 @@ public class JDBCMysqlPreparedStatementInsertRecord {
                 preparedStatement.executeUpdate();
 
                 System.out.println("Record is inserted into DBUSER table!");
+                preparedStatement = connection.prepareStatement("select LAST_INSERT_ID()");
+                ResultSet rs=preparedStatement.executeQuery();
+                rs.next();
+                Integer lastid = rs.getInt(1);
+                rs.close();
+                System.out.println("Insert ID:"+lastid);
 
             } catch (SQLException e) {
 
