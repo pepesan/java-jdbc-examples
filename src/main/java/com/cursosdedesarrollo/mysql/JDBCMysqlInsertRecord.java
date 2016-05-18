@@ -49,8 +49,9 @@ public class JDBCMysqlInsertRecord {
 
                 System.out.println("Record is inserted into DBUSER table!");
                 System.out.println("Records updated:"+statement.getUpdateCount());
-                ResultSet rs=statement.executeQuery("select last_insert_id() as last_id from DBUSER");
-                String lastid = rs.getString("last_id");
+                ResultSet rs=statement.executeQuery("select LAST_INSERT_ID()");
+                rs.next();
+                Integer lastid = rs.getInt(1);
                 System.out.println("Insert ID:"+lastid);
 
 
