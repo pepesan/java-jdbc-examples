@@ -71,38 +71,16 @@ public class JDBCH2InMemory {
         }
 
         if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             System.out.println("You made it, take control your database now!");
         } else {
             System.out.println("Failed to make connection!");
         }
     }
-    private static void insertWithStatement() throws SQLException {
 
-        Statement stmt = null;
-        try {
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-            stmt.execute("CREATE TABLE PERSON(id int primary key, name varchar(255))");
-            stmt.execute("INSERT INTO PERSON(id, name) VALUES(1, 'Anju')");
-            stmt.execute("INSERT INTO PERSON(id, name) VALUES(2, 'Sonia')");
-            stmt.execute("INSERT INTO PERSON(id, name) VALUES(3, 'Asha')");
-
-            ResultSet rs = stmt.executeQuery("select * from PERSON");
-            System.out.println("H2 In-Memory Database inserted through Statement");
-            while (rs.next()) {
-                System.out.println("Id " + rs.getInt("id") + " Name " + rs.getString("name"));
-            }
-
-            stmt.execute("DROP TABLE PERSON");
-            stmt.close();
-            connection.commit();
-        } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-    }
 
 }

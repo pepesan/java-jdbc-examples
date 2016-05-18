@@ -32,10 +32,11 @@ public class JDBCMysqlCreateTable {
                     .getConnection("jdbc:mysql://localhost:3306/demo","root", "");
              statement= null;
             String createTableSQL = "CREATE TABLE DBUSER("
-                    + "USER_ID INTEGER (5) NOT NULL AUTO_INCREMENT, "
+                    + "USER_ID INTEGER (5) UNSIGNED NOT NULL AUTO_INCREMENT, "
                     + "USERNAME VARCHAR(20) NOT NULL, "
                     + "CREATED_BY VARCHAR(20) NOT NULL, "
-                    + "CREATED_DATE DATETIME NOT NULL, " + "PRIMARY KEY (USER_ID) "
+                    + "CREATED_DATE DATETIME NOT NULL, "
+                    + "PRIMARY KEY (USER_ID) "
                     + ")";
             try {
 

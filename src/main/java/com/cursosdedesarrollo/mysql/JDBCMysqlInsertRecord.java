@@ -1,9 +1,6 @@
 package com.cursosdedesarrollo.mysql;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -52,6 +49,9 @@ public class JDBCMysqlInsertRecord {
 
                 System.out.println("Record is inserted into DBUSER table!");
                 System.out.println("Records updated:"+statement.getUpdateCount());
+                ResultSet rs=statement.executeQuery("select last_insert_id() as last_id from DBUSER");
+                String lastid = rs.getString("last_id");
+                System.out.println("Insert ID:"+lastid);
 
 
             } catch (SQLException e) {

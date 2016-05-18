@@ -28,6 +28,7 @@ public class JDBCHSQLDBFile {
             connection = DriverManager
                     .getConnection("jdbc:hsqldb:file:testdb", "sa", "");
 
+
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
@@ -36,6 +37,11 @@ public class JDBCHSQLDBFile {
 
         if (connection != null) {
             System.out.println("You made it, take control your database now!");
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } else {
             System.out.println("Failed to make connection!");
         }

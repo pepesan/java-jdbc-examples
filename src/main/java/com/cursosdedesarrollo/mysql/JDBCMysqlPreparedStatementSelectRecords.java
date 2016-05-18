@@ -1,8 +1,13 @@
 package com.cursosdedesarrollo.mysql;
 
+import com.cursosdedesarrollo.beans.User;
+
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pepesan on 16/5/16.
@@ -30,10 +35,10 @@ public class JDBCMysqlPreparedStatementSelectRecords {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/demo","root", "");
+                    .getConnection("jdbc:mysql://localhost:3306/test","root", "");
 
 
-            String selectSQL = "SELECT USER_ID, USERNAME FROM DBUSER WHERE USERNAME = ?";
+            String selectSQL = "SELECT USER_ID, USERNAME,CREATED_BY,CREATED_DATE FROM DBUSER1 WHERE USERNAME = ?";
 
             try {
                 preparedStatement = connection.prepareStatement(selectSQL);
@@ -41,17 +46,26 @@ public class JDBCMysqlPreparedStatementSelectRecords {
 
                 // execute select SQL stetement
                 ResultSet rs = preparedStatement.executeQuery();
-
+                List<User> listado=new ArrayList<User>();
                 while (rs.next()) {
 
-                    String userid = rs.getString("USER_ID");
+                    Integer userid = rs.getInt("USER_ID");
                     String username = rs.getString("USERNAME");
-
+                    String created_by = rs.getString("CREATED_BY");
+                    Date created_date = rs.getDate("CREATED_DATE");
+                    User user=new User();
+                    user.setUSER_ID(userid);
+                    user.setUSERNAME(username);
+                    user.setCREATED_BY(created_by);
+                    user.setCREATED_DATE(created_date);
                     System.out.println("userid : " + userid);
                     System.out.println("username : " + username);
-
+                    System.out.println("created_by : " + created_by);
+                    System.out.println("created_date : " + created_date);
+                    System.out.println("user : " + user);
+                    listado.add(user);
                 }
-
+                System.out.println(listado);
             } catch (SQLException e) {
 
                 System.out.println(e.getMessage());

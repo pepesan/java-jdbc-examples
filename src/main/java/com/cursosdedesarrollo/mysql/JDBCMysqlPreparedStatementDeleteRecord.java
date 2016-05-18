@@ -33,7 +33,7 @@ public class JDBCMysqlPreparedStatementDeleteRecord {
                     .getConnection("jdbc:mysql://localhost:3306/demo","root", "");
 
 
-            String deleteSQL = "DELETE DBUSER WHERE USERNAME = ?";
+            String deleteSQL = "DELETE FROM DBUSER WHERE USERNAME = ?";
 
             try {
 

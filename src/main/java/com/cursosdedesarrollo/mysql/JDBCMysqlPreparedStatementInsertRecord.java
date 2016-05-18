@@ -1,5 +1,7 @@
 package com.cursosdedesarrollo.mysql;
 
+import com.cursosdedesarrollo.beans.User;
+
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,13 +40,13 @@ public class JDBCMysqlPreparedStatementInsertRecord {
                     + "(?,?,?)";
 
             try {
-
+                User user=new User(null,"pepesan","system",new Date(2016,2,26));
                 preparedStatement = connection.prepareStatement(insertTableSQL);
 
 
-                preparedStatement.setString(1, "pepesan");
-                preparedStatement.setString(2, "system");
-                preparedStatement.setTimestamp(3,new Timestamp(System.currentTimeMillis()));
+                preparedStatement.setString(1, user.getUSERNAME());
+                preparedStatement.setString(2, user.getCREATED_BY());
+                preparedStatement.setDate(3,user.getCREATED_DATE());
 
                 // execute insert SQL stetement
                 preparedStatement.executeUpdate();

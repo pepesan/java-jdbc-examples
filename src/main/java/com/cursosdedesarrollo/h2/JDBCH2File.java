@@ -35,6 +35,11 @@ public class JDBCH2File {
         }
 
         if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             System.out.println("You made it, take control your database now!");
         } else {
             System.out.println("Failed to make connection!");
